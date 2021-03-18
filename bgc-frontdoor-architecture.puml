@@ -1,0 +1,41 @@
+@startuml
+
+title Front Door Components
+
+interface "Client App" as fda
+
+cloud "API Gateway \n HTTP + WS" as gateway {
+
+}
+
+database DynamoDB {
+    [UserPermissions]
+    ' Single RefData table? Table for each entity?
+    [RefData]
+    [Iois]
+    [ConnectedClients]
+}
+
+' FIX
+fda -d-> gateway : HTTP
+fda <--- gateway : WS
+
+gateway --> [λ_WsConnection]
+gateway --> [λ_RefDataProvider]
+gateway --> [λ_IoiUpsertHandler]
+[λ_IoiBroadcaster] -u-> gateway
+
+' NOTE: Reusable component
+[λ_WsConnection] --> [ConnectedClients]
+
+[λ_RefDataProvider] --> [RefData]
+[λ_RefDataProvider] --> [UserPermissions]
+
+[λ_IoiUpsertHandler] --> [Iois]
+[λ_IoiUpsertHandler] --> [UserPermissions]
+
+[λ_IoiBroadcaster] --> [ConnectedClients]
+[λ_IoiBroadcaster] --> [UserPermissions]
+[Iois] -u-> [λ_IoiBroadcaster]
+
+@enduml

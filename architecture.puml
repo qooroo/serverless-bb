@@ -1,0 +1,27 @@
+@startuml
+
+title Serverless RFQ trading platform
+
+Actor Client as c
+Component ApiGateway as api
+Component "λ ConnectionHandler" as ch
+Component "λ MessageHandler" as mh
+Component "λ QuoteEngine" as q
+Component "λ EventPublisher" as ep
+Database WsConnections as wc
+Database Rfqs as rfqs
+
+' c <--> api
+' api --> ch
+' ch --> wc
+
+' api --> mh
+' mh --> rfqs
+
+' q <-> rfqs
+
+' ep <-- rfqs
+' ep <--> wc
+' api <-- ep
+
+@enduml
