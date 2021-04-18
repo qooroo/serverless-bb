@@ -11,17 +11,17 @@ Component "λ EventPublisher" as ep
 Database WsConnections as wc
 Database Rfqs as rfqs
 
-' c <--> api
-' api --> ch
-' ch --> wc
+c <--> api
+api --> ch
+ch --> wc
 
-' api --> mh
-' mh --> rfqs
+api --> mh
+mh --> rfqs
 
-' q <-> rfqs
+q <-> rfqs
 
-' ep <-- rfqs
-' ep <--> wc
-' api <-- ep
+ep <-- rfqs
+ep <--> wc
+api <-- ep
 
 @enduml

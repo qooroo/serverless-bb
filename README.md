@@ -5,8 +5,6 @@
         - levels of thing-as-a-service
         - security and cost
 
-![lambda](lambda.png)
-
     - AWS Lambda
         - stateless, easy to test
         - request-response use cases

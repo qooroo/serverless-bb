@@ -1,6 +1,0 @@
-@startuml
-
-[*] -> λ : trigger
-λ -> [*] : (destination)
-
-@enduml
